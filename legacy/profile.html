@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile Settings - The Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#fcf8fe",
+                    "primary-dim": "#4c4f7f",
+                    "on-tertiary": "#fff7fb",
+                    "secondary-fixed-dim": "#d3d2eb",
+                    "secondary-container": "#e1e0f9",
+                    "primary-fixed": "#c0c2fa",
+                    "on-primary-container": "#393c6a",
+                    "inverse-surface": "#0e0e12",
+                    "on-tertiary-fixed-variant": "#6c4d72",
+                    "on-primary-fixed-variant": "#424574",
+                    "tertiary-fixed": "#f7d0fd",
+                    "on-secondary-fixed-variant": "#595a6f",
+                    "surface-container": "#efecf6",
+                    "on-error-container": "#6e0523",
+                    "on-tertiary-container": "#614468",
+                    "on-error": "#fff7f7",
+                    "secondary-dim": "#515166",
+                    "primary": "#585b8c",
+                    "error": "#a8364b",
+                    "secondary-fixed": "#e1e0f9",
+                    "on-primary": "#fbf7ff",
+                    "surface-tint": "#585b8c",
+                    "on-secondary-container": "#505064",
+                    "surface-container-low": "#f5f2fb",
+                    "error-container": "#f97386",
+                    "inverse-on-surface": "#9e9ca2",
+                    "tertiary-dim": "#67486d",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#dbd8e4",
+                    "on-secondary-fixed": "#3d3e51",
+                    "secondary": "#5d5d72",
+                    "surface": "#fcf8fe",
+                    "on-tertiary-fixed": "#4e3154",
+                    "tertiary-fixed-dim": "#e9c2ee",
+                    "inverse-primary": "#c0c2fa",
+                    "primary-fixed-dim": "#b2b4eb",
+                    "on-surface": "#32323b",
+                    "tertiary": "#73547a",
+                    "error-dim": "#6b0221",
+                    "surface-container-highest": "#e4e1ed",
+                    "primary-container": "#c0c2fa",
+                    "outline": "#7b7a84",
+                    "surface-variant": "#e4e1ed",
+                    "on-surface-variant": "#5f5e68",
+                    "outline-variant": "#b2b1bc",
+                    "tertiary-container": "#f7d0fd",
+                    "on-primary-fixed": "#252755",
+                    "on-secondary": "#fbf7ff",
+                    "surface-container-high": "#eae7f1",
+                    "surface-bright": "#fcf8fe",
+                    "on-background": "#32323b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar Shell -->
+<aside class="w-72 h-screen sticky left-0 top-0 bg-slate-50 dark:bg-slate-900 flex flex-col p-6 space-y-8 font-['Plus_Jakarta_Sans'] tracking-tight">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="spa">spa</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-indigo-900 dark:text-indigo-100">The Sanctuary</h1>
+<p class="text-xs text-on-surface-variant font-medium">Premium Focus</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 px-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            New Entry
+        </button>
+<nav class="flex-1 space-y-2">
+<!-- Sanctuary (Inactive) -->
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="spa">spa</span>
+<span>Sanctuary</span>
+</a>
+<!-- Focus Sessions (Inactive) -->
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="timer">timer</span>
+<span>Focus Sessions</span>
+</a>
+<!-- Project Journal (Inactive) -->
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span>Project Journal</span>
+</a>
+<!-- Archive (Inactive) -->
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span>Archive</span>
+</a>
+<!-- Settings (Active) -->
+<a class="flex items-center gap-3 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl px-4 py-3 font-semibold transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="pt-6 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 px-2">
+<img alt="User profile photo" class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a calm young woman in a studio setting with soft purple and blue ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA3Ik1fqe8wpHwhyJfFGxpALNKR1nOYI9tP0SonmX7B3nQ1EvzTJKhU48xF4gD4QEffTxHg4Y9jeauMcgrCPsX8SivOaR4v6QngMucG3qLjVogQO5nv2SvZ3zvHMnw1_EngRxi669TjT8MIlHdyiMgagPSTU4SMSk9T-kd3AN-5c9AR_OdC72L8ZX6C-sPmOXOc8D1fgHET9SrQuTThp7S4IxLXR8V2QJSEilelSjBqbsvd4v38H4soOI1D1em6RSC5aA-QjdN_BM"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Elena Vance</p>
+<p class="text-xs text-on-surface-variant truncate">Pro Member</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 bg-surface min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="sticky top-0 z-40 w-full bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl flex justify-between items-center px-12 py-4 h-20">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="search">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/40 focus:outline-none transition-all" placeholder="Search settings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</button>
+<div class="h-8 w-px bg-outline-variant/30"></div>
+<img alt="Profile avatar" class="w-10 h-10 rounded-full object-cover" data-alt="Close-up profile of a professional woman with a serene expression, soft morning light in a modern office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaAuih9Ovc_gNfsFBht_E1AV0IQroPPgeR4Wwn2xAbb9PV5vhwDDqs-BABcvbv4zSdkrjSw0f7-7YtuWUpVejJtAKqwX0rdeFfeEbHjb6jD1w_9pKIKut91x6IPJxVhD7ZIJm2n__KsCyFL_Y8vQHivThhDNqlj9nxRu0koYfQI2SCkbANyaXDsdAQEu_k-jhxksZMmrTrTMTc-eCteBfYAYiEBrcVqP10sBkuFfZBHxY5AaJ_JkFyu1v4V39_mRrq9OUsf85Ke70"/>
+</div>
+</header>
+<!-- Editorial Content Area -->
+<section class="max-w-4xl mx-auto px-12 py-16">
+<div class="mb-12">
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-on-surface mb-2">Profile Settings</h2>
+<p class="text-on-surface-variant text-lg">Curate your sanctuary experience and personal identity.</p>
+</div>
+<!-- Profile Bento Card -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Avatar Section -->
+<div class="md:col-span-1 bg-surface-container-low rounded-[2rem] p-8 flex flex-col items-center justify-center space-y-6">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full overflow-hidden ring-4 ring-white shadow-xl">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Portrait of a young professional woman looking forward with a slight smile, high-end editorial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-Dvo45hnBa-c3x8Ij1wTMgAXToC79XHqnfuF6NZAXoj203z43qwXBDJ3hsbP7i70oqvB7DpRSGZg9O0bgTYZV6k0XoV3Ya3MMLiETO3QGSnFSJ09YXSwdHdXEI9GYfZiH5Mwv7tmwGJSGm9VOTfCRuJp7667aR-RMxYDAdL4HYkeYlClT6WrpDBwW67n2-ZtVdyBfJ8a33YZsKiq_xOypz00YfCw8qWpXPy4yVpwwLHlV_LX45nWSlQUsL7q8Ciu3FdNJYKD1UwA"/>
+</div>
+<button class="absolute bottom-1 right-1 bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-4 border-surface-container-low hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="text-center">
+<p class="text-sm font-semibold text-primary">Member since 2023</p>
+<p class="text-xs text-on-surface-variant mt-1">Free to upload JPG or PNG</p>
+</div>
+</div>
+<!-- Identity Details Section -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-[2rem] p-10 space-y-8">
+<!-- Form Fields -->
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface ml-1">Full Name</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 px-5 text-on-surface focus:ring-2 focus:ring-primary/40 focus:outline-none transition-all font-medium" type="text" value="Elena Vance"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface ml-1">Email Address</label>
+<div class="w-full bg-surface-container-low border-none rounded-xl py-4 px-5 text-on-surface-variant flex items-center justify-between">
+<span>elena.vance@sanctuary.io</span>
+<span class="material-symbols-outlined text-sm" data-icon="lock" data-weight="fill">lock</span>
+</div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold ml-1">Primary contact email</p>
+</div>
+</div>
+<!-- CTA Actions -->
+<div class="flex items-center justify-between pt-6">
+<button class="text-error font-semibold text-sm px-6 py-3 rounded-xl hover:bg-error/5 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+                            Log Out
+                        </button>
+<button class="bg-primary text-on-primary font-bold px-8 py-4 rounded-xl shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+                            Save Settings
+                        </button>
+</div>
+</div>
+</div>
+<!-- Additional Preference Sections (Asymmetric Layout) -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-surface-container-low p-8 rounded-[2rem]">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</div>
+<h3 class="font-headline font-bold text-xl">Focus Notifications</h3>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium">Daily morning check-in</span>
+<div class="w-12 h-6 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium">Focus session completed</span>
+<div class="w-12 h-6 bg-outline-variant rounded-full relative">
+<div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-primary-container p-8 rounded-[2rem] text-on-primary-container relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
+<h3 class="font-headline font-bold text-xl mb-4 relative z-10">Subscription</h3>
+<div class="relative z-10">
+<p class="text-sm opacity-90 mb-6">You are currently on the <span class="font-bold">Sanctuary Pro</span> plan with lifetime access to all focus journals.</p>
+<button class="bg-on-primary-container text-primary-container px-6 py-3 rounded-xl font-bold text-sm w-full">
+                            Manage Billing
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>

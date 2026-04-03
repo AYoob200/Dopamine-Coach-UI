@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#fcf8fe",
+                    "primary-dim": "#4c4f7f",
+                    "on-tertiary": "#fff7fb",
+                    "secondary-fixed-dim": "#d3d2eb",
+                    "secondary-container": "#e1e0f9",
+                    "primary-fixed": "#c0c2fa",
+                    "on-primary-container": "#393c6a",
+                    "inverse-surface": "#0e0e12",
+                    "on-tertiary-fixed-variant": "#6c4d72",
+                    "on-primary-fixed-variant": "#424574",
+                    "tertiary-fixed": "#f7d0fd",
+                    "on-secondary-fixed-variant": "#595a6f",
+                    "surface-container": "#efecf6",
+                    "on-error-container": "#6e0523",
+                    "on-tertiary-container": "#614468",
+                    "on-error": "#fff7f7",
+                    "secondary-dim": "#515166",
+                    "primary": "#585b8c",
+                    "error": "#a8364b",
+                    "secondary-fixed": "#e1e0f9",
+                    "on-primary": "#fbf7ff",
+                    "surface-tint": "#585b8c",
+                    "on-secondary-container": "#505064",
+                    "surface-container-low": "#f5f2fb",
+                    "error-container": "#f97386",
+                    "inverse-on-surface": "#9e9ca2",
+                    "tertiary-dim": "#67486d",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#dbd8e4",
+                    "on-secondary-fixed": "#3d3e51",
+                    "secondary": "#5d5d72",
+                    "surface": "#fcf8fe",
+                    "on-tertiary-fixed": "#4e3154",
+                    "tertiary-fixed-dim": "#e9c2ee",
+                    "inverse-primary": "#c0c2fa",
+                    "primary-fixed-dim": "#b2b4eb",
+                    "on-surface": "#32323b",
+                    "tertiary": "#73547a",
+                    "error-dim": "#6b0221",
+                    "surface-container-highest": "#e4e1ed",
+                    "primary-container": "#c0c2fa",
+                    "outline": "#7b7a84",
+                    "surface-variant": "#e4e1ed",
+                    "on-surface-variant": "#5f5e68",
+                    "outline-variant": "#b2b1bc",
+                    "tertiary-container": "#f7d0fd",
+                    "on-primary-fixed": "#252755",
+                    "on-secondary": "#fbf7ff",
+                    "surface-container-high": "#eae7f1",
+                    "surface-bright": "#fcf8fe",
+                    "on-background": "#32323b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-gradient-signature {
+            background: linear-gradient(135deg, #585b8c 0%, #4c4f7f 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<div class="flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="w-72 h-screen sticky left-0 top-0 bg-slate-50 dark:bg-slate-900 flex flex-col p-6 space-y-8 z-50">
+<div class="flex flex-col space-y-1">
+<div class="text-xl font-bold text-indigo-900 dark:text-indigo-100 font-headline tracking-tight">The Sanctuary</div>
+<div class="text-xs text-on-surface-variant/70 font-medium">Premium Focus</div>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Sanctuary (Active) -->
+<a class="flex items-center gap-3 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl px-4 py-3 font-semibold transition-all duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="spa">spa</span>
+<span class="font-headline tracking-tight">Sanctuary</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="timer">timer</span>
+<span class="font-headline tracking-tight">Focus Sessions</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-headline tracking-tight">Project Journal</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-headline tracking-tight">Archive</span>
+</a>
+<div class="pt-8">
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-headline tracking-tight">Settings</span>
+</a>
+</div>
+</nav>
+<button class="bg-gradient-signature text-on-primary rounded-xl px-6 py-4 font-semibold shadow-lg shadow-primary/20 flex items-center justify-center gap-2 transition-transform hover:opacity-90 active:scale-95">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>New Entry</span>
+</button>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col relative overflow-hidden">
+<!-- Top Bar / Profile Area -->
+<header class="sticky top-0 z-40 w-full bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl flex justify-end items-center px-12 py-4 h-20">
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant/20">
+<div class="text-right hidden sm:block">
+<div class="text-sm font-semibold text-on-surface">Alex Rivera</div>
+<div class="text-xs text-on-surface-variant">Focus Tier: Premium</div>
+</div>
+<img alt="User profile photo" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary-container ring-offset-2" data-alt="Close up portrait of a professional woman with a calm expression in a bright modern office with natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHIYAhloithrYzXz71X-0GgR5LXtDYb7Nd2rXIcE3GRf7nFb7uYWPq78EDdZyum7zLzU4ZPPop3ufNIhlWNzbz_08R1XOMPw0hrjdcPt3kBgDqu9KD073iPrssqgSaK4x2XiLVPfWWxI6ekelqqpnsJ3pcIPr5egYAriu0nE1PHHDWBPyVek5Dg9812kxpLLtMgmX6J7Lf3NMln5HeXfGSo8ZEv6oDlKF0t1Qpo_5QWx58qiUgsbagpR57AV7u_98bxMJEK9b-zxU"/>
+</div>
+</div>
+</header>
+<!-- Hero Section / Central Interface -->
+<section class="flex-1 flex flex-col items-center justify-center px-6 md:px-24 pb-20">
+<div class="w-full max-w-3xl text-center space-y-12">
+<div class="space-y-4">
+<h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter text-on-surface font-headline leading-none">
+                            Dopamine <span class="text-primary italic">Couch</span>
+</h1>
+<p class="text-on-surface-variant text-lg font-medium max-w-lg mx-auto">
+                            Design your focus. Reclaim your attention in a sanctuary built for intentional action.
+                        </p>
+</div>
+<div class="w-full space-y-6 relative">
+<!-- Input Surface -->
+<div class="bg-surface-container-lowest p-2 rounded-[2rem] shadow-[0px_20px_40px_rgba(50,50,59,0.04)]">
+<textarea class="w-full min-h-[160px] bg-surface-container-low border-none rounded-xl p-8 text-xl text-on-surface placeholder:text-on-surface-variant/40 focus:ring-2 focus:ring-primary/20 transition-all resize-none font-body" id="focus-input" placeholder="What would you like to accomplish today?"></textarea>
+</div>
+<!-- Action Button -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="group bg-gradient-signature text-on-primary px-10 py-5 rounded-xl font-bold text-lg shadow-xl shadow-primary/25 flex items-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.95]" onclick="console.log(document.getElementById('focus-input').value)">
+<span>Create Steps</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="px-8 py-5 text-on-surface-variant font-semibold hover:bg-surface-container-high rounded-xl transition-colors">
+                                View Previous Session
+                            </button>
+</div>
+</div>
+<!-- Subtle Decorative Elements -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
+<div class="bg-surface-container-low p-6 rounded-xl text-left border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary mb-3" data-icon="auto_awesome">auto_awesome</span>
+<h3 class="font-bold text-on-surface mb-1">Deep Work</h3>
+<p class="text-sm text-on-surface-variant">Structured blocks for maximum cognitive output.</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl text-left border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary mb-3" data-icon="psychology">psychology</span>
+<h3 class="font-bold text-on-surface mb-1">Brain Dump</h3>
+<p class="text-sm text-on-surface-variant">Clear the mental clutter before you start the grind.</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl text-left border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary mb-3" data-icon="verified">verified</span>
+<h3 class="font-bold text-on-surface mb-1">Journaling</h3>
+<p class="text-sm text-on-surface-variant">Reflect on your progress to refine your flow.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Background Aesthetic Texture -->
+<div class="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-primary-container/20 rounded-full blur-[120px] -z-10"></div>
+<div class="absolute -top-40 -left-40 w-[400px] h-[400px] bg-tertiary-container/10 rounded-full blur-[100px] -z-10"></div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Completed Tasks - Dopamine Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#5f5e68",
+                      "on-secondary-fixed-variant": "#595a6f",
+                      "on-secondary-container": "#505064",
+                      "tertiary-dim": "#67486d",
+                      "on-tertiary-fixed": "#4e3154",
+                      "primary-dim": "#4c4f7f",
+                      "on-primary-container": "#393c6a",
+                      "error": "#a8364b",
+                      "surface-dim": "#dbd8e4",
+                      "tertiary-fixed": "#f7d0fd",
+                      "secondary": "#5d5d72",
+                      "on-background": "#32323b",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error": "#fff7f7",
+                      "on-surface": "#32323b",
+                      "primary-fixed": "#c0c2fa",
+                      "inverse-on-surface": "#9e9ca2",
+                      "on-tertiary-container": "#614468",
+                      "on-secondary-fixed": "#3d3e51",
+                      "error-dim": "#6b0221",
+                      "surface-container": "#efecf6",
+                      "tertiary-container": "#f7d0fd",
+                      "secondary-dim": "#515166",
+                      "surface-container-highest": "#e4e1ed",
+                      "tertiary": "#73547a",
+                      "surface-container-low": "#f5f2fb",
+                      "surface-container-high": "#eae7f1",
+                      "on-error-container": "#6e0523",
+                      "inverse-surface": "#0e0e12",
+                      "surface-bright": "#fcf8fe",
+                      "background": "#fcf8fe",
+                      "tertiary-fixed-dim": "#e9c2ee",
+                      "surface": "#fcf8fe",
+                      "surface-tint": "#585b8c",
+                      "secondary-fixed": "#e1e0f9",
+                      "inverse-primary": "#c0c2fa",
+                      "surface-variant": "#e4e1ed",
+                      "on-tertiary-fixed-variant": "#6c4d72",
+                      "secondary-container": "#e1e0f9",
+                      "on-tertiary": "#fff7fb",
+                      "on-primary-fixed": "#252755",
+                      "outline": "#7b7a84",
+                      "on-primary-fixed-variant": "#424574",
+                      "primary": "#585b8c",
+                      "outline-variant": "#b2b1bc",
+                      "on-secondary": "#fbf7ff",
+                      "primary-fixed-dim": "#b2b4eb",
+                      "secondary-fixed-dim": "#d3d2eb",
+                      "primary-container": "#c0c2fa",
+                      "error-container": "#f97386",
+                      "on-primary": "#fbf7ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": [ "Plus Jakarta Sans" ],
+                      "body": [ "Inter" ],
+                      "label": [ "Inter" ]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Scrollbar for Sanctuary vibe */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #b2b1bc40; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SIDEBAR (JSON Shell) -->
+<aside class="fixed left-0 top-0 h-full w-64 rounded-r-3xl bg-slate-900 dark:bg-[#1a1b26] flex flex-col h-screen py-8 px-6 z-50 transition-all duration-300 shadow-[0px_20px_40px_rgba(0,0,0,0.2)]">
+<div class="mb-10">
+<h1 class="text-xl font-bold tracking-tight text-indigo-100 font-headline">Dopamine Studio</h1>
+<p class="text-indigo-400/60 text-[10px] uppercase tracking-widest font-semibold mt-1">Digital Sanctuary</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="text-slate-400 hover:text-slate-200 px-4 py-3 flex items-center gap-3 transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-xl">grid_view</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="text-slate-400 hover:text-slate-200 px-4 py-3 flex items-center gap-3 transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-xl">calendar_month</span>
+<span class="font-medium text-sm">Upcoming</span>
+</a>
+<a class="text-slate-400 hover:text-slate-200 px-4 py-3 flex items-center gap-3 transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-xl">bolt</span>
+<span class="font-medium text-sm">Focus Mode</span>
+</a>
+<!-- ACTIVE STATE: Completed -->
+<a class="bg-indigo-500/20 text-indigo-300 rounded-xl px-4 py-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-bold text-sm">Completed</span>
+</a>
+<a class="text-slate-400 hover:text-slate-200 px-4 py-3 flex items-center gap-3 transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-xl">insights</span>
+<span class="font-medium text-sm">Analytics</span>
+</a>
+<a class="text-slate-400 hover:text-slate-200 px-4 py-3 flex items-center gap-3 transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-6">
+<button class="w-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-200 rounded-xl py-3 px-4 flex items-center justify-center gap-2 hover:bg-indigo-500/20 transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+<span class="font-semibold text-sm">Add Task</span>
+</button>
+<div class="pt-6 border-t border-slate-800">
+<div class="flex items-center gap-3 px-2">
+<img class="w-8 h-8 rounded-full bg-indigo-500/30 p-1" data-alt="minimalist user avatar icon with a soft purple glow on a dark slate background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDewKBicS9eVpXfRHRxU7ocGVShmksCCwhZDgupmuRzA7WUcEnwGvuTO9LcaQfKNw_-acW5NDbz6Vuh1Nfy9ueez1SilngRTxNk6ZvZ9bv2bChIgL3eHx3UkKVhgzKJiZarRH1qpT5trcxvZmrNpaxdEn-N5HEXCkalY06DOWeZWxznpl2kMBlAiQcNKWOvX153OlSv322G1xAq-qiNruzjg5c488WorsundWc_gbmcFCZKftlDqk1vYEQH3rOauCd_BpLnO8Uf54A"/>
+<div class="overflow-hidden">
+<p class="text-indigo-100 text-sm font-semibold truncate">Alex Rivera</p>
+<p class="text-indigo-400/60 text-xs">Premium Member</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- TOP NAVBAR (JSON Shell) -->
+<header class="flex justify-between items-center w-full px-12 py-6 max-w-screen-2xl mx-auto ml-64 bg-transparent backdrop-blur-xl sticky top-0 z-40">
+<div class="flex items-center gap-8">
+<h2 class="text-indigo-400 font-headline font-bold text-xl tracking-tight">Completed</h2>
+<nav class="flex gap-6">
+<a class="text-slate-500 font-medium pb-2 hover:text-indigo-300 transition-colors" href="#">All Time</a>
+<a class="text-slate-500 font-medium pb-2 hover:text-indigo-300 transition-colors" href="#">This Week</a>
+<a class="text-indigo-400 font-bold border-b-2 border-indigo-500 pb-2" href="#">Today</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container-highest border-none rounded-full pl-10 pr-4 py-2 text-xs w-48 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search archives..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="material-symbols-outlined hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined hover:text-primary transition-colors">account_circle</button>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT CANVAS -->
+<main class="ml-64 px-12 pb-24 pt-4 max-w-screen-2xl mx-auto min-h-screen">
+<!-- HEADER SECTION -->
+<section class="mb-12">
+<h1 class="text-[3.5rem] font-extrabold font-headline text-on-surface leading-none mb-2">Completed</h1>
+<div class="flex items-center gap-3">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-bold">Completed: 24 tasks</span>
+<span class="text-on-surface-variant text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">celebration</span>
+                    Great focus today, Alex.
+                </span>
+</div>
+</section>
+<!-- TASK ARCHIVE CONTENT -->
+<div class="space-y-16">
+<!-- TODAY GROUP -->
+<section>
+<div class="flex items-center gap-4 mb-8">
+<h3 class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Today</h3>
+<div class="flex-1 h-[1px] bg-outline-variant/15"></div>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<!-- Task Item 1 -->
+<div class="group bg-surface-container-low rounded-2xl p-6 flex items-center justify-between transition-all hover:bg-surface-container-high">
+<div class="flex items-center gap-6">
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-on-surface/50 line-through decoration-primary/40 decoration-2">Morning Deep Work: System Design</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">schedule</span>
+                                        09:30 AM
+                                    </span>
+<span class="flex items-center gap-1 bg-tertiary-container/30 text-on-tertiary-container px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+                                        Dopamine Hit
+                                    </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-surface-container-lowest px-4 py-2 rounded-xl text-xs font-semibold text-primary hover:bg-primary hover:text-white transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">history</span>
+                                Restore
+                            </button>
+</div>
+</div>
+<!-- Task Item 2 -->
+<div class="group bg-surface-container-low rounded-2xl p-6 flex items-center justify-between transition-all hover:bg-surface-container-high">
+<div class="flex items-center gap-6">
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-on-surface/50 line-through decoration-primary/40 decoration-2">Client Review Meeting</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">schedule</span>
+                                        11:00 AM
+                                    </span>
+<span class="material-symbols-outlined text-primary-dim text-sm" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-surface-container-lowest px-4 py-2 rounded-xl text-xs font-semibold text-primary hover:bg-primary hover:text-white transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">history</span>
+                                Restore
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- YESTERDAY GROUP -->
+<section>
+<div class="flex items-center gap-4 mb-8">
+<h3 class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Yesterday</h3>
+<div class="flex-1 h-[1px] bg-outline-variant/15"></div>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<!-- Task Item 3 -->
+<div class="group bg-surface-container-low/50 rounded-2xl p-6 flex items-center justify-between transition-all hover:bg-surface-container-high border-l-4 border-transparent hover:border-primary/20">
+<div class="flex items-center gap-6">
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-on-surface/50 line-through decoration-primary/40 decoration-2">Gym Session: Legs</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant">Completed 16:45 PM</span>
+<span class="flex items-center gap-1 bg-secondary-container/50 text-on-secondary-container px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">trophy</span>
+                                        Daily Streak
+                                    </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-surface-container-lowest px-4 py-2 rounded-xl text-xs font-semibold text-primary hover:bg-primary hover:text-white transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">history</span>
+                                Restore
+                            </button>
+</div>
+</div>
+<!-- Task Item 4 -->
+<div class="group bg-surface-container-low/50 rounded-2xl p-6 flex items-center justify-between transition-all hover:bg-surface-container-high border-l-4 border-transparent hover:border-primary/20">
+<div class="flex items-center gap-6">
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-on-surface/50 line-through decoration-primary/40 decoration-2">Plan next week's sprints</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-xs text-on-surface-variant">Completed 18:20 PM</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-surface-container-lowest px-4 py-2 rounded-xl text-xs font-semibold text-primary hover:bg-primary hover:text-white transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">history</span>
+                                Restore
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- EARLIER THIS MONTH -->
+<section>
+<div class="flex items-center gap-4 mb-8">
+<h3 class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">April 1st</h3>
+<div class="flex-1 h-[1px] bg-outline-variant/15"></div>
+</div>
+<div class="bg-surface-container-low rounded-3xl overflow-hidden shadow-sm">
+<div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+<!-- Tiny Task Grid for older items -->
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/10 last:border-0">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-dim text-lg">check_circle</span>
+<span class="text-sm font-medium text-on-surface/40 line-through">Buy groceries</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm cursor-pointer hover:text-primary">history</span>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/10 last:border-0">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-dim text-lg">check_circle</span>
+<span class="text-sm font-medium text-on-surface/40 line-through">Water plants</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm cursor-pointer hover:text-primary">history</span>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/10 last:border-0">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-dim text-lg">check_circle</span>
+<span class="text-sm font-medium text-on-surface/40 line-through">Car wash</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm cursor-pointer hover:text-primary">history</span>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/10 last:border-0">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-dim text-lg">check_circle</span>
+<span class="text-sm font-medium text-on-surface/40 line-through">Backup server</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm cursor-pointer hover:text-primary">history</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- ASYMMETRIC DECORATIVE BENTO ELEMENT -->
+<section class="mt-24 grid grid-cols-12 gap-6 h-[280px]">
+<div class="col-span-8 bg-primary/5 rounded-[2.5rem] p-10 flex flex-col justify-center relative overflow-hidden">
+<div class="z-10">
+<h3 class="text-2xl font-bold font-headline text-on-primary-container mb-2">Reflect on your wins</h3>
+<p class="text-on-surface-variant max-w-md text-sm leading-relaxed">You've cleared 24 tasks this cycle. Your focus score is up by 12% compared to last week. Take a moment to breathe.</p>
+<button class="mt-6 bg-primary text-on-primary rounded-full px-6 py-3 font-semibold text-sm hover:shadow-lg transition-all active:scale-95">View Focus Analytics</button>
+</div>
+<div class="absolute -right-12 -bottom-12 opacity-10">
+<span class="material-symbols-outlined text-[240px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+</div>
+<div class="col-span-4 bg-secondary-container/40 rounded-[2.5rem] p-8 flex flex-col items-center justify-center text-center relative">
+<img class="w-24 h-24 mb-4 drop-shadow-xl" data-alt="a glass trophy icon with a golden glow and soft refractions representing achievement and completion" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5obj97yz3FsKvQtP7vkEoHI6-l1W0PzqeOYNzg7LR-4HmlM4XMUTgtRwe41IERfsIvL2-oAIV38R9kElgLLVZBCriJXsn7UiTEjS_ICpb50bz8LTEyddyGj5r_EdG5fQ39rJ0UGzx1yhUS_NLM9jnxiDozoQic-V3gIubptQsWoBSyfI6sdq_F_H6R1kFtixgPtoJSMZw-R8YsyZzLMKzDguUIcs9YlL14-pBWnCTZ0xXTMWHcQisiD-R0ITzpR1_z0cWFCzh43Q"/>
+<p class="font-headline font-bold text-on-secondary-container">Monthly Badge</p>
+<p class="text-xs text-on-secondary-fixed-variant mt-1">Focus Master II</p>
+</div>
+</section>
+</main>
+<!-- FLOATING ACTION BUTTON (Suppressed as per rules for Details/Focused pages, but included as a "Clean Archive" tool if needed) -->
+<!-- Suppression: FAB is only for "Book a Walk" style triggers on Home. In this context, the shell rules imply we focus on content. -->
+</body></html>
