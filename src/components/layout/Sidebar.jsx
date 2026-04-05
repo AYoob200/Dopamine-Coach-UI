@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useGlobalState } from '../../context/GlobalStateContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ar } from '../../i18n/ar';
 import {
   Zap,
   CalendarDays,
@@ -16,16 +17,17 @@ import {
   Inbox,
 } from 'lucide-react';
 
-const navItems = [
-  { to: '/', icon: Zap, label: 'Coach' },
-  { to: '/upcoming', icon: CalendarDays, label: 'Upcoming' },
-  { to: '/completed', icon: CheckCircle2, label: 'Completed' },
-  { to: '/profile', icon: Settings, label: 'Settings' },
-];
-
 export default function Sidebar() {
-  const { user, tasks, selectTask, logout } = useGlobalState();
+  const { user, tasks, selectTask, logout, language } = useGlobalState();
   const navigate = useNavigate();
+  const isArabic = language === 'ar';
+
+  const navItems = [
+    { to: '/', icon: Zap, label: isArabic ? ar.pages.coach : 'Coach' },
+    { to: '/upcoming', icon: CalendarDays, label: isArabic ? ar.pages.upcoming : 'Upcoming' },
+    { to: '/completed', icon: CheckCircle2, label: isArabic ? ar.pages.completed : 'Completed' },
+    { to: '/profile', icon: Settings, label: isArabic ? ar.pages.settings : 'Settings' },
+  ];
 
   const [query, setQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -58,7 +60,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-gray-50 dark:bg-gray-950 border-r border-gray-200 dark:border-gray-800 flex flex-col z-50">
+    <aside className="app-sidebar fixed left-0 top-0 h-screen w-64 bg-gray-50 dark:bg-gray-950 border-r border-gray-200 dark:border-gray-800 flex flex-col z-50">
       {/* Logo */}
       <div className="px-5 py-6">
         <div className="flex items-center gap-2.5">
@@ -75,14 +77,14 @@ export default function Sidebar() {
       {/* Search Bar */}
       <div className="px-4 pb-4" ref={searchRef}>
         <div className="relative">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" />
+          <Search size={14} className="sidebar-search-icon absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => setIsSearchFocused(true)}
-            placeholder="Search tasks..."
-            className="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg py-2 pl-9 pr-4 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-gray-300 dark:focus:border-gray-600 focus:ring-1 focus:ring-gray-200 dark:focus:ring-gray-700 transition-all"
+            placeholder={isArabic ? 'ابحث في المهام...' : 'Search tasks...'}
+            className="sidebar-search-input w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg py-2 pl-9 pr-4 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-gray-300 dark:focus:border-gray-600 focus:ring-1 focus:ring-gray-200 dark:focus:ring-gray-700 transition-all"
           />
 
           <AnimatePresence>
@@ -117,7 +119,7 @@ export default function Sidebar() {
                 ) : (
                   <div className="px-3 py-6 text-center flex flex-col items-center justify-center">
                     <Inbox size={20} className="text-gray-300 dark:text-gray-600 mb-2" />
-                    <p className="text-sm text-gray-500 dark:text-gray-400">No tasks found</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{isArabic ? 'لا توجد مهام' : 'No tasks found'}</p>
                   </div>
                 )}
               </motion.div>
@@ -151,14 +153,14 @@ export default function Sidebar() {
       <div className="mt-auto px-3 pb-4 space-y-0.5 pt-4 border-t border-gray-200 dark:border-gray-800">
         <button className="w-full flex items-center gap-3 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white px-3 py-2.5 hover:bg-white dark:hover:bg-gray-900 rounded-lg transition-colors text-sm">
           <HelpCircle size={18} />
-          <span>Help</span>
+          <span>{isArabic ? 'مساعدة' : 'Help'}</span>
         </button>
         <button
           onClick={handleLogout}
           className="w-full flex items-center gap-3 text-gray-500 dark:text-gray-400 hover:text-red-500 px-3 py-2.5 hover:bg-white dark:hover:bg-gray-900 rounded-lg transition-colors text-sm"
         >
           <LogOut size={18} />
-          <span>Sign Out</span>
+          <span>{isArabic ? 'تسجيل الخروج' : 'Sign Out'}</span>
         </button>
 
         {user && (

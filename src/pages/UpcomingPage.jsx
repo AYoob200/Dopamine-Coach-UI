@@ -1,16 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 import { useGlobalState } from '../context/GlobalStateContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Clock, Play, Trash2, CalendarDays } from 'lucide-react';
+import { Plus, Play, Trash2, CalendarDays } from 'lucide-react';
 import { useState } from 'react';
+import { durationTagFromMinutes } from '../utils/momentum';
 
 const priorityDot = { high: 'bg-red-500', medium: 'bg-amber-500', low: 'bg-blue-400' };
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const arabicDays = ['الاث', 'الثل', 'الأر', 'الخ', 'الجم', 'السب', 'الأح'];
 
 export default function UpcomingPage() {
-  const { tasks, selectTask, deleteTask, addTask } = useGlobalState();
+  const { tasks, selectTask, deleteTask, addTask, language } = useGlobalState();
   const navigate = useNavigate();
+  const isArabic = language === 'ar';
+  const durationPresets = [
+    { value: 15, label: durationTagFromMinutes(15, language).label },
+    { value: 25, label: durationTagFromMinutes(25, language).label },
+    { value: 40, label: durationTagFromMinutes(40, language).label },
+    { value: 55, label: durationTagFromMinutes(55, language).label },
+  ];
   const [showAdd, setShowAdd] = useState(false);
   const [title, setTitle] = useState('');
   const [priority, setPriority] = useState('medium');
@@ -32,14 +41,14 @@ export default function UpcomingPage() {
     <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full bg-white dark:bg-gray-950">
       <div className="px-8 pt-6 pb-4 border-b border-gray-100 dark:border-gray-800">
         <div className="flex items-center gap-6">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Upcoming</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{isArabic ? 'القادم' : 'Upcoming'}</h2>
           <div className="flex gap-1.5">
             {days.map((day, i) => {
               const d = new Date(today);
               d.setDate(today.getDate() - dow + i);
               return (
                 <div key={day} className="flex flex-col items-center gap-1">
-                  <span className="text-[10px] font-medium text-gray-400 dark:text-gray-500 uppercase">{day}</span>
+                  <span className="text-[10px] font-medium text-gray-400 dark:text-gray-500 uppercase">{isArabic ? arabicDays[i] : day}</span>
                   <div className={`w-8 h-8 flex items-center justify-center rounded-lg text-xs font-medium transition-colors ${
                     i === dow ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
                   }`}>
@@ -54,11 +63,11 @@ export default function UpcomingPage() {
 
       <div className="flex-1 overflow-y-auto px-8 py-6">
         <div className="flex items-center gap-2 mb-4">
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Today</h3>
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{isArabic ? 'اليوم' : 'Today'}</h3>
           <span className="text-xs text-gray-400 dark:text-gray-500">
-            {today.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+            {today.toLocaleDateString(isArabic ? 'ar-EG' : 'en-US', { month: 'short', day: 'numeric' })}
           </span>
-          <span className="text-xs text-gray-400 dark:text-gray-500 ml-auto">{tasks.length} tasks</span>
+          <span className="text-xs text-gray-400 dark:text-gray-500 ml-auto">{isArabic ? `${tasks.length} مهام` : `${tasks.length} tasks`}</span>
         </div>
 
         <div className="space-y-1.5">
@@ -77,9 +86,9 @@ export default function UpcomingPage() {
 
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{task.title}</p>
-                  <p className="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-1.5 mt-0.5">
-                    <Clock size={10} /> {task.duration}min
-                  </p>
+                  <span className={`inline-flex mt-0.5 text-[10px] font-medium px-1.5 py-0.5 rounded ${durationTagFromMinutes(task.duration, language).tone}`}>
+                    {durationTagFromMinutes(task.duration, language).label}
+                  </span>
                 </div>
 
                 <div className="flex items-center gap-1.5">
@@ -89,7 +98,7 @@ export default function UpcomingPage() {
                     whileTap={{ scale: 0.9 }}
                     onClick={() => handleFocus(task.id)}
                     className="p-1.5 rounded-lg bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
-                    title="Start Focus"
+                    title={isArabic ? 'ابدأ التركيز' : 'Start Focus'}
                   >
                     <Play size={14} fill="currentColor" />
                   </motion.button>
@@ -109,10 +118,10 @@ export default function UpcomingPage() {
           {tasks.length === 0 && (
             <div className="text-center py-16">
               <CalendarDays size={40} className="text-gray-200 dark:text-gray-800 mx-auto mb-3" />
-              <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">No tasks yet</p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">Ask your Coach to break down a goal</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">{isArabic ? 'لا توجد مهام بعد' : 'No tasks yet'}</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">{isArabic ? 'اطلب من المدرب تقسيم هدفك' : 'Ask your Coach to break down a goal'}</p>
               <button onClick={() => navigate('/')} className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-5 py-2 rounded-xl text-sm font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
-                Talk to Coach
+                {isArabic ? 'التحدث مع المدرب' : 'Talk to Coach'}
               </button>
             </div>
           )}
@@ -124,29 +133,31 @@ export default function UpcomingPage() {
                 onSubmit={handleAdd}
                 className="p-3 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 space-y-2.5"
               >
-                <input autoFocus value={title} onChange={e => setTitle(e.target.value)} placeholder="Task name..."
+                <input autoFocus value={title} onChange={e => setTitle(e.target.value)} placeholder={isArabic ? 'اسم المهمة...' : 'Task name...'}
                   className="w-full bg-transparent border-none text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-0 p-0"
                 />
                 <div className="flex items-center gap-2">
                   <select value={priority} onChange={e => setPriority(e.target.value)}
                     className="text-xs bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-gray-600 dark:text-gray-300 focus:outline-none focus:border-gray-300 dark:focus:border-gray-600">
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
+                    <option value="high">{isArabic ? 'عالية' : 'High'}</option>
+                    <option value="medium">{isArabic ? 'متوسطة' : 'Medium'}</option>
+                    <option value="low">{isArabic ? 'منخفضة' : 'Low'}</option>
                   </select>
-                  <input type="number" value={duration} onChange={e => setDuration(+e.target.value)} min={5} max={120}
-                    className="w-16 text-xs bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-gray-600 dark:text-gray-300 focus:outline-none focus:border-gray-300 dark:focus:border-gray-600"
-                  />
-                  <span className="text-xs text-gray-400 dark:text-gray-500">min</span>
+                  <select value={duration} onChange={e => setDuration(+e.target.value)}
+                    className="text-xs bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-gray-600 dark:text-gray-300 focus:outline-none focus:border-gray-300 dark:focus:border-gray-600">
+                    {durationPresets.map(preset => (
+                      <option key={preset.value} value={preset.value}>{preset.label}</option>
+                    ))}
+                  </select>
                   <div className="flex-1" />
-                  <button type="button" onClick={() => setShowAdd(false)} className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 px-2 py-1.5">Cancel</button>
-                  <button type="submit" className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">Add</button>
+                  <button type="button" onClick={() => setShowAdd(false)} className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 px-2 py-1.5">{isArabic ? 'إلغاء' : 'Cancel'}</button>
+                  <button type="submit" className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">{isArabic ? 'إضافة' : 'Add'}</button>
                 </div>
               </motion.form>
             ) : (
               <button onClick={() => setShowAdd(true)}
                 className="flex items-center gap-2 px-3 py-2.5 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
-                <Plus size={16} /> Add Task
+                <Plus size={16} /> {isArabic ? 'إضافة مهمة' : 'Add Task'}
               </button>
             )}
           </AnimatePresence>

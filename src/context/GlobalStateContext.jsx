@@ -2,6 +2,11 @@ import { createContext, useContext, useReducer, useEffect, useCallback } from 'r
 
 const GlobalStateContext = createContext(null);
 
+const TEST_CREDENTIALS = {
+  email: 'test@gmail.com',
+  password: '12345678',
+};
+
 // ─── Helpers ──────────────────────────────────────────
 const loadFromStorage = (key, fallback) => {
   try {
@@ -17,15 +22,24 @@ const saveToStorage = (key, value) => {
 const generateId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 
 // ─── Mock AI Task Breakdown ───────────────────────────
-const mockAIBreakdown = (goal) => {
-  const templates = [
-    { prefix: 'Research', duration: 15 },
-    { prefix: 'Outline', duration: 10 },
-    { prefix: 'Draft', duration: 25 },
-    { prefix: 'Review', duration: 15 },
-    { prefix: 'Refine', duration: 20 },
-    { prefix: 'Finalize', duration: 10 },
-  ];
+const mockAIBreakdown = (goal, language = 'en') => {
+  const templates = language === 'ar'
+    ? [
+      { prefix: 'بحث', duration: 15 },
+      { prefix: 'خطة', duration: 10 },
+      { prefix: 'مسودة', duration: 25 },
+      { prefix: 'مراجعة', duration: 15 },
+      { prefix: 'تحسين', duration: 20 },
+      { prefix: 'إنهاء', duration: 10 },
+    ]
+    : [
+      { prefix: 'Research', duration: 15 },
+      { prefix: 'Outline', duration: 10 },
+      { prefix: 'Draft', duration: 25 },
+      { prefix: 'Review', duration: 15 },
+      { prefix: 'Refine', duration: 20 },
+      { prefix: 'Finalize', duration: 10 },
+    ];
   const words = goal.trim().split(' ').slice(0, 6).join(' ');
   return templates.map((t, i) => ({
     id: generateId() + i,
@@ -61,6 +75,7 @@ const createInitialState = () => ({
   // UI
   toast: null,
   theme: loadFromStorage('dc_theme', 'light'), // light | dark
+  language: loadFromStorage('dc_language', 'en'), // en | ar
 });
 
 // ─── Reducer ──────────────────────────────────────────
@@ -193,6 +208,8 @@ function globalReducer(state, action) {
       return { ...state, toast: null };
     case 'TOGGLE_THEME':
       return { ...state, theme: state.theme === 'light' ? 'dark' : 'light' };
+    case 'SET_LANGUAGE':
+      return { ...state, language: action.payload || 'en' };
 
     default:
       return state;
@@ -211,7 +228,8 @@ export function GlobalStateProvider({ children }) {
     saveToStorage('dc_current_task', state.currentTask);
     saveToStorage('dc_task_state', state.taskState);
     saveToStorage('dc_theme', state.theme);
-  }, [state.user, state.tasks, state.completedTasks, state.currentTask, state.taskState, state.theme]);
+    saveToStorage('dc_language', state.language);
+  }, [state.user, state.tasks, state.completedTasks, state.currentTask, state.taskState, state.theme, state.language]);
 
   // Auto-hide toast
   useEffect(() => {
@@ -223,8 +241,15 @@ export function GlobalStateProvider({ children }) {
 
   // ── Actions ──
   const login = useCallback((email, password) => {
+    if (
+      email.trim().toLowerCase() !== TEST_CREDENTIALS.email ||
+      password !== TEST_CREDENTIALS.password
+    ) {
+      return false;
+    }
     const name = email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     dispatch({ type: 'LOGIN', payload: { email, name } });
+    return true;
   }, []);
 
   const signup = useCallback((name, email, password) => {
@@ -242,13 +267,13 @@ export function GlobalStateProvider({ children }) {
 
   const addTask = useCallback((task) => {
     dispatch({ type: 'ADD_TASK', payload: task });
-    dispatch({ type: 'SHOW_TOAST', payload: { message: 'Task added ✨', type: 'success' } });
-  }, []);
+    dispatch({ type: 'SHOW_TOAST', payload: { message: state.language === 'ar' ? 'تمت إضافة المهمة ✨' : 'Task added ✨', type: 'success' } });
+  }, [state.language]);
 
   const addMultipleTasks = useCallback((tasks) => {
     dispatch({ type: 'ADD_MULTIPLE_TASKS', payload: tasks });
-    dispatch({ type: 'SHOW_TOAST', payload: { message: `${tasks.length} tasks added ✨`, type: 'success' } });
-  }, []);
+    dispatch({ type: 'SHOW_TOAST', payload: { message: state.language === 'ar' ? `تمت إضافة ${tasks.length} مهام ✨` : `${tasks.length} tasks added ✨`, type: 'success' } });
+  }, [state.language]);
 
   const deleteTask = useCallback((id) => {
     dispatch({ type: 'DELETE_TASK', payload: id });
@@ -264,13 +289,13 @@ export function GlobalStateProvider({ children }) {
 
   const completeTask = useCallback(() => {
     dispatch({ type: 'COMPLETE_TASK' });
-    dispatch({ type: 'SHOW_TOAST', payload: { message: 'Task completed! 🎉', type: 'celebration' } });
-  }, []);
+    dispatch({ type: 'SHOW_TOAST', payload: { message: state.language === 'ar' ? 'تم إنجاز المهمة! 🎉' : 'Task completed! 🎉', type: 'celebration' } });
+  }, [state.language]);
 
   const restoreTask = useCallback((id) => {
     dispatch({ type: 'RESTORE_TASK', payload: id });
-    dispatch({ type: 'SHOW_TOAST', payload: { message: 'Task restored', type: 'info' } });
-  }, []);
+    dispatch({ type: 'SHOW_TOAST', payload: { message: state.language === 'ar' ? 'تمت استعادة المهمة' : 'Task restored', type: 'info' } });
+  }, [state.language]);
 
   const resetCycle = useCallback(() => dispatch({ type: 'RESET_CYCLE' }), []);
 
@@ -278,10 +303,10 @@ export function GlobalStateProvider({ children }) {
     dispatch({ type: 'AI_LOADING' });
     // Simulate AI thinking delay
     await new Promise(resolve => setTimeout(resolve, 1500));
-    const subtasks = mockAIBreakdown(goal);
+    const subtasks = mockAIBreakdown(goal, state.language);
     dispatch({ type: 'AI_RESULT', payload: subtasks });
     return subtasks;
-  }, []);
+  }, [state.language]);
 
   const clearAI = useCallback(() => dispatch({ type: 'AI_CLEAR' }), []);
 
@@ -290,6 +315,9 @@ export function GlobalStateProvider({ children }) {
   }, []);
 
   const toggleTheme = useCallback(() => dispatch({ type: 'TOGGLE_THEME' }), []);
+  const setLanguage = useCallback((language) => {
+    dispatch({ type: 'SET_LANGUAGE', payload: language });
+  }, []);
 
   const value = {
     ...state,
@@ -298,7 +326,7 @@ export function GlobalStateProvider({ children }) {
     selectTask, startWork, startBreak, pauseTask,
     completeTask, restoreTask, resetCycle,
     breakdownGoal, clearAI,
-    showToast, toggleTheme,
+    showToast, toggleTheme, setLanguage,
     dispatch,
   };
 

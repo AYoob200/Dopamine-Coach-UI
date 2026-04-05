@@ -1,0 +1,58 @@
+{
+  "locale": "en",
+  "direction": "ltr",
+  "meta": {
+    "name": "English",
+    "nativeName": "English"
+  },
+  "appName": "Dopamine Coach",
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "add": "Add",
+    "delete": "Delete",
+    "pause": "Pause",
+    "resume": "Resume",
+    "quit": "Quit",
+    "loading": "Loading..."
+  },
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "signInToContinue": "Sign in to continue focusing",
+    "email": "Email",
+    "password": "Password",
+    "forgot": "Forgot?",
+    "signIn": "Sign in",
+    "createAccount": "Create account",
+    "newHere": "New here?",
+    "invalidCredentials": "Invalid credentials"
+  },
+  "pages": {
+    "coach": "Coach",
+    "upcoming": "Upcoming",
+    "completed": "Completed",
+    "settings": "Settings",
+    "focusSession": "Focus Session",
+    "breakTime": "Break Time",
+    "restAndRecharge": "Rest & Recharge",
+    "addTask": "Add Task",
+    "noTasksYet": "No tasks yet"
+  },
+  "momentum": {
+    "ignition": "Ignition",
+    "flowRising": "Flow Rising",
+    "deepFocus": "Deep Focus",
+    "finalPush": "Final Push",
+    "steadyHold": "Steady Hold",
+    "exhale": "Exhale",
+    "recharge": "Recharge",
+    "resetComplete": "Reset Complete",
+    "backToMotion": "Back to Motion"
+  },
+  "settings": {
+    "language": "Language",
+    "languageHint": "Choose app language and UI direction",
+    "english": "English",
+    "arabic": "Arabic"
+  }
+}

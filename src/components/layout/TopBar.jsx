@@ -3,7 +3,8 @@ import { Bell, Sun, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function TopBar() {
-  const { user, theme, toggleTheme } = useGlobalState();
+  const { user, theme, toggleTheme, language } = useGlobalState();
+  const isArabic = language === 'ar';
 
   return (
     <header className="sticky top-0 z-30 w-full bg-white dark:bg-gray-950 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center px-8 py-3 h-14">
@@ -14,7 +15,7 @@ export default function TopBar() {
           whileTap={{ scale: 0.9 }}
           onClick={toggleTheme}
           className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-          title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+          title={theme === 'light' ? (isArabic ? 'التبديل إلى الوضع الداكن' : 'Switch to dark mode') : (isArabic ? 'التبديل إلى الوضع الفاتح' : 'Switch to light mode')}
         >
           <motion.div
             initial={false}

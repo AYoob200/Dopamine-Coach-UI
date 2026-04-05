@@ -5,9 +5,9 @@ import Toast from '../ui/Toast';
 
 export default function AppLayout() {
   return (
-    <div className="flex min-h-screen bg-white dark:bg-gray-950">
+    <div className="app-layout flex min-h-screen bg-white dark:bg-gray-950">
       <Sidebar />
-      <main className="ml-64 flex-1 flex flex-col min-h-screen">
+      <main className="app-layout-main flex-1 flex flex-col min-h-screen">
         <TopBar />
         <div className="flex-1 bg-white dark:bg-gray-950">
           <Outlet />

@@ -1,0 +1,54 @@
+{
+  "locale": "ar",
+  "direction": "rtl",
+  "appName": "مدرب الدوبامين",
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "add": "إضافة",
+    "delete": "حذف",
+    "pause": "إيقاف مؤقت",
+    "resume": "استئناف",
+    "quit": "إنهاء",
+    "loading": "جاري التحميل..."
+  },
+  "auth": {
+    "welcomeBack": "مرحبا بعودتك",
+    "signInToContinue": "سجل الدخول للمتابعة",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "forgot": "نسيت؟",
+    "signIn": "تسجيل الدخول",
+    "createAccount": "إنشاء حساب",
+    "newHere": "جديد هنا؟",
+    "invalidCredentials": "بيانات الدخول غير صحيحة"
+  },
+  "pages": {
+    "coach": "المدرب",
+    "upcoming": "القادم",
+    "completed": "المكتمل",
+    "settings": "الإعدادات",
+    "focusSession": "جلسة تركيز",
+    "breakTime": "وقت استراحة",
+    "restAndRecharge": "استرح واستعد طاقتك",
+    "addTask": "إضافة مهمة",
+    "noTasksYet": "لا توجد مهام بعد"
+  },
+  "momentum": {
+    "ignition": "انطلاقة",
+    "flowRising": "تدفق متصاعد",
+    "deepFocus": "تركيز عميق",
+    "finalPush": "دفعة أخيرة",
+    "steadyHold": "ثبات هادئ",
+    "exhale": "تنفس",
+    "recharge": "استعادة الطاقة",
+    "resetComplete": "اكتمال الاستعادة",
+    "backToMotion": "عودة للحركة"
+  },
+  "settings": {
+    "language": "اللغة",
+    "languageHint": "اختر لغة التطبيق واتجاه الواجهة",
+    "english": "الإنجليزية",
+    "arabic": "العربية"
+  }
+}

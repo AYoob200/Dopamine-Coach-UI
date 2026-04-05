@@ -77,3 +77,38 @@ input, textarea, select, button {
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #4B5563;
 }
+
+.app-layout-main {
+  margin-left: 16rem;
+}
+
+html[dir='rtl'] .app-sidebar {
+  left: auto;
+  right: 0;
+  border-right: 0;
+  border-left: 1px solid rgb(229 231 235 / 1);
+}
+
+html.dark[dir='rtl'] .app-sidebar {
+  border-left-color: rgb(31 41 55 / 1);
+}
+
+html[dir='rtl'] .app-layout-main {
+  margin-left: 0;
+  margin-right: 16rem;
+}
+
+html[dir='rtl'] .sidebar-search-icon {
+  left: auto;
+  right: 0.75rem;
+}
+
+html[dir='rtl'] .sidebar-search-input {
+  padding-left: 1rem;
+  padding-right: 2.25rem;
+}
+
+html[dir='rtl'] .app-sidebar nav,
+html[dir='rtl'] .app-sidebar {
+  text-align: right;
+}

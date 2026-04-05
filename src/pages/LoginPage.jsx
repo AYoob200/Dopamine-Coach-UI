@@ -3,14 +3,16 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useGlobalState } from '../context/GlobalStateContext';
 import { motion } from 'framer-motion';
 import { Zap, ArrowRight, Eye, EyeOff, Sun, Moon } from 'lucide-react';
+import { ar } from '../i18n/ar';
 
 export default function LoginPage() {
-  const { login, isAuthenticated, theme, toggleTheme } = useGlobalState();
+  const { login, isAuthenticated, theme, toggleTheme, showToast, language } = useGlobalState();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const isArabic = language === 'ar';
 
   if (isAuthenticated) {
     navigate('/', { replace: true });
@@ -22,8 +24,13 @@ export default function LoginPage() {
     if (!email || !password) return;
     setLoading(true);
     await new Promise(r => setTimeout(r, 500));
-    login(email, password);
-    navigate('/');
+    const loggedIn = login(email, password);
+    if (loggedIn) {
+      navigate('/');
+    } else {
+      showToast(isArabic ? ar.auth.invalidCredentials : 'Invalid credentials. Use test@gmail.com / 12345678', 'info');
+    }
+    setLoading(false);
   };
 
   return (
@@ -44,21 +51,21 @@ export default function LoginPage() {
               <span className="text-xs text-gray-500 dark:text-gray-400 leading-none">Coach</span>
             </div>
           </div>
-          <h1 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">Welcome back</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Sign in to continue focusing</p>
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">{isArabic ? ar.auth.welcomeBack : 'Welcome back'}</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{isArabic ? ar.auth.signInToContinue : 'Sign in to continue focusing'}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5 ml-0.5">
-              Email
+              {isArabic ? ar.auth.email : 'Email'}
             </label>
             <input
               id="login-email"
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="you@example.com"
+              placeholder={isArabic ? 'you@example.com' : 'you@example.com'}
               className="w-full h-11 px-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-gray-300 dark:focus:border-gray-600 focus:ring-1 focus:ring-gray-200 dark:focus:ring-gray-700 transition-all"
               required
             />
@@ -67,10 +74,10 @@ export default function LoginPage() {
           <div>
             <div className="flex justify-between items-center mb-1.5">
               <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 ml-0.5">
-                Password
+                {isArabic ? ar.auth.password : 'Password'}
               </label>
               <button type="button" className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-                Forgot?
+                {isArabic ? ar.auth.forgot : 'Forgot?'}
               </button>
             </div>
             <div className="relative">
@@ -103,7 +110,7 @@ export default function LoginPage() {
               <div className="w-4 h-4 border-2 border-white/30 dark:border-gray-900/30 border-t-white dark:border-t-gray-900 rounded-full animate-spin" />
             ) : (
               <>
-                Sign In
+                {isArabic ? ar.auth.signIn : 'Sign In'}
                 <ArrowRight size={16} />
               </>
             )}
@@ -115,7 +122,7 @@ export default function LoginPage() {
             <div className="w-full border-t border-gray-100 dark:border-gray-800" />
           </div>
           <div className="relative flex justify-center">
-            <span className="px-3 bg-white dark:bg-gray-950 text-gray-400 dark:text-gray-500 text-xs">or</span>
+            <span className="px-3 bg-white dark:bg-gray-950 text-gray-400 dark:text-gray-500 text-xs">{isArabic ? 'أو' : 'or'}</span>
           </div>
         </div>
 
@@ -126,7 +133,7 @@ export default function LoginPage() {
             <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05" />
             <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
           </svg>
-          Continue with Google
+          {isArabic ? 'المتابعة باستخدام Google' : 'Continue with Google'}
         </button>
 
         <div className="flex items-center justify-center mt-8">
@@ -139,10 +146,13 @@ export default function LoginPage() {
         </div>
 
         <p className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
-          New here?{' '}
+          {isArabic ? ar.auth.newHere : 'New here?'}{' '}
           <Link to="/signup" className="font-medium text-gray-900 dark:text-white hover:underline transition-colors">
-            Create account
+            {isArabic ? ar.auth.createAccount : 'Create account'}
           </Link>
+        </p>
+        <p className="mt-2 text-center text-xs text-gray-400 dark:text-gray-500">
+          {isArabic ? 'حساب تجريبي: test@gmail.com / 12345678' : 'Test login: test@gmail.com / 12345678'}
         </p>
       </motion.main>
     </div>

@@ -3,10 +3,12 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useGlobalState } from '../context/GlobalStateContext';
 import { motion } from 'framer-motion';
 import { Zap, ArrowRight, Sun, Moon } from 'lucide-react';
+import { ar } from '../i18n/ar';
 
 export default function SignupPage() {
-  const { signup, isAuthenticated, theme, toggleTheme } = useGlobalState();
+  const { signup, isAuthenticated, theme, toggleTheme, language } = useGlobalState();
   const navigate = useNavigate();
+  const isArabic = language === 'ar';
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,13 +46,13 @@ export default function SignupPage() {
               <span className="text-xs text-gray-500 dark:text-gray-400 leading-none">Coach</span>
             </div>
           </div>
-          <h1 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">Create account</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Start your focus journey</p>
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">{isArabic ? ar.auth.createAccount : 'Create account'}</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{isArabic ? 'ابدأ رحلتك مع التركيز' : 'Start your focus journey'}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5 ml-0.5">Full Name</label>
+            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5 ml-0.5">{isArabic ? 'الاسم الكامل' : 'Full Name'}</label>
             <input
               type="text" value={name} onChange={e => setName(e.target.value)}
               placeholder="Alex Rivera"
@@ -59,7 +61,7 @@ export default function SignupPage() {
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5 ml-0.5">Email</label>
+            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5 ml-0.5">{isArabic ? ar.auth.email : 'Email'}</label>
             <input
               type="email" value={email} onChange={e => setEmail(e.target.value)}
               placeholder="alex@example.com"
@@ -68,7 +70,7 @@ export default function SignupPage() {
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5 ml-0.5">Password</label>
+            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5 ml-0.5">{isArabic ? ar.auth.password : 'Password'}</label>
             <input
               type="password" value={password} onChange={e => setPassword(e.target.value)}
               placeholder="••••••••"
@@ -86,7 +88,7 @@ export default function SignupPage() {
             {loading ? (
               <div className="w-4 h-4 border-2 border-white/30 dark:border-gray-900/30 border-t-white dark:border-t-gray-900 rounded-full animate-spin" />
             ) : (
-              <>Create Account <ArrowRight size={16} /></>
+              <>{isArabic ? ar.auth.createAccount : 'Create Account'} <ArrowRight size={16} /></>
             )}
           </motion.button>
         </form>
@@ -101,9 +103,9 @@ export default function SignupPage() {
         </div>
 
         <p className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
-          Already have an account?{' '}
+          {isArabic ? 'لديك حساب بالفعل؟' : 'Already have an account?'}{' '}
           <Link to="/login" className="font-medium text-gray-900 dark:text-white hover:underline transition-colors">
-            Sign in
+            {isArabic ? ar.auth.signIn : 'Sign in'}
           </Link>
         </p>
       </motion.main>

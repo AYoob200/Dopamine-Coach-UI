@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useGlobalState } from './context/GlobalStateContext';
+import { applyLocaleDirection } from './i18n';
 
 // Guards
 import ProtectedRoute from './components/guards/ProtectedRoute';
@@ -21,7 +22,7 @@ import CompletedPage from './pages/CompletedPage';
 import ProfilePage from './pages/ProfilePage';
 
 export default function App() {
-  const { theme } = useGlobalState();
+  const { theme, language } = useGlobalState();
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -30,6 +31,10 @@ export default function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [theme]);
+
+  useEffect(() => {
+    applyLocaleDirection(language);
+  }, [language]);
 
   return (
     <Routes>

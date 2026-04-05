@@ -2,6 +2,7 @@ import { useGlobalState } from '../context/GlobalStateContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, Undo2, Trophy } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { completionMomentTag } from '../utils/momentum';
 
 function ConfettiParticle({ delay }) {
   const colors = ['#111827', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'];
@@ -30,7 +31,7 @@ function ConfettiParticle({ delay }) {
   );
 }
 
-function DopaminePop({ show, onComplete }) {
+function DopaminePop({ show, onComplete, isArabic }) {
   if (!show) return null;
 
   return (
@@ -59,7 +60,7 @@ function DopaminePop({ show, onComplete }) {
             transition={{ delay: 0.3 }}
             className="text-2xl font-semibold text-gray-900 dark:text-white mt-4"
           >
-            Task Crushed!
+            {isArabic ? 'تم إنجاز المهمة!' : 'Task Crushed!'}
           </motion.p>
         </div>
       </motion.div>
@@ -68,8 +69,9 @@ function DopaminePop({ show, onComplete }) {
 }
 
 export default function CompletedPage() {
-  const { completedTasks, restoreTask, taskState } = useGlobalState();
+  const { completedTasks, restoreTask, taskState, language } = useGlobalState();
   const [showPop, setShowPop] = useState(false);
+  const isArabic = language === 'ar';
 
   useEffect(() => {
     if (taskState === 'completed') {
@@ -83,9 +85,9 @@ export default function CompletedPage() {
     const yesterday = new Date(today); yesterday.setDate(yesterday.getDate() - 1);
 
     let label;
-    if (date.toDateString() === today.toDateString()) label = 'Today';
-    else if (date.toDateString() === yesterday.toDateString()) label = 'Yesterday';
-    else label = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+    if (date.toDateString() === today.toDateString()) label = isArabic ? 'اليوم' : 'Today';
+    else if (date.toDateString() === yesterday.toDateString()) label = isArabic ? 'أمس' : 'Yesterday';
+    else label = date.toLocaleDateString(isArabic ? 'ar-EG' : 'en-US', { month: 'long', day: 'numeric' });
 
     if (!acc[label]) acc[label] = [];
     acc[label].push(task);
@@ -94,18 +96,18 @@ export default function CompletedPage() {
 
   return (
     <div className="flex-1 px-8 py-8 max-w-3xl mx-auto w-full bg-white dark:bg-gray-950">
-      <DopaminePop show={showPop} onComplete={() => setShowPop(false)} />
+      <DopaminePop show={showPop} onComplete={() => setShowPop(false)} isArabic={isArabic} />
 
       <div className="mb-8">
-        <h1 className="text-xl font-semibold text-gray-900 dark:text-white">Completed</h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{completedTasks.length} tasks done</p>
+        <h1 className="text-xl font-semibold text-gray-900 dark:text-white">{isArabic ? 'المكتمل' : 'Completed'}</h1>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{isArabic ? `${completedTasks.length} مهام منجزة` : `${completedTasks.length} tasks done`}</p>
       </div>
 
       {completedTasks.length === 0 ? (
         <div className="text-center py-20">
           <Trophy size={40} className="text-gray-200 dark:text-gray-800 mx-auto mb-3" />
-          <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">No completed tasks yet</p>
-          <p className="text-xs text-gray-400 dark:text-gray-500">Complete a focus session to celebrate here</p>
+          <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">{isArabic ? 'لا توجد مهام مكتملة بعد' : 'No completed tasks yet'}</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500">{isArabic ? 'أكمل جلسة تركيز للاحتفال هنا' : 'Complete a focus session to celebrate here'}</p>
         </div>
       ) : (
         <div className="space-y-8">
@@ -140,7 +142,7 @@ export default function CompletedPage() {
                           {task.title}
                         </p>
                         <p className="text-xs text-gray-300 dark:text-gray-600 mt-0.5">
-                          {task.completedAt && new Date(task.completedAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                          {task.completedAt ? completionMomentTag(task.completedAt, language) : (isArabic ? 'إنجاز زخم' : 'Momentum Win')}
                         </p>
                       </div>
 
@@ -149,7 +151,7 @@ export default function CompletedPage() {
                         onClick={() => restoreTask(task.id)}
                         className="opacity-0 group-hover:opacity-100 px-3 py-1.5 rounded-lg text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white dark:hover:bg-gray-800 transition-all flex items-center gap-1.5"
                       >
-                        <Undo2 size={12} /> Undo
+                        <Undo2 size={12} /> {isArabic ? 'تراجع' : 'Undo'}
                       </motion.button>
                     </motion.div>
                   ))}
